@@ -47,4 +47,8 @@ Rails.application.routes.draw do
     resources :users, only: [:index, :show]
     patch '/orders/:id/ship', to: 'orders#ship'
   end
+
+  resources :users, only: %i[new create show] do
+    resources :locales, only: %i[new create]
+  end
 end
