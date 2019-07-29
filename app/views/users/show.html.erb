@@ -2,4 +2,12 @@
 <%= link_to 'Edit', '/profile/edit' %>
 <%= link_to 'Change Password', '/profile/edit_password' %>
 
+<section id='locale-info'>
+  <h3>Locale</h3>
+  <p> <% unless @user.locales.any?%>
+      You have not set your locale.
+      <% end %> </p>
+      <%= link_to 'Add Locale', new_user_locale_path(@user) %>
+</section>
+
 <%= link_to 'My Orders', '/profile/orders' %>
