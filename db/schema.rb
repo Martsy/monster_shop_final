@@ -29,7 +29,7 @@ ActiveRecord::Schema.define(version: 20190729180226) do
   end
 
   create_table "locales", force: :cascade do |t|
-    t.string "nickname"
+    t.string "nickname", default: 'Primary'
     t.string "address"
     t.string "city"
     t.string "state"
