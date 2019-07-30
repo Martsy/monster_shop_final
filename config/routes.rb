@@ -54,5 +54,8 @@ Rails.application.routes.draw do
     patch '/orders/:id/ship', to: 'orders#ship'
   end
 
-  resources :locales
+
+  resources :users, only: %i[new create show] do
+    resources :locales, only: %i[new create]
+  end
 end
