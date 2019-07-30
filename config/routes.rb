@@ -28,6 +28,12 @@ Rails.application.routes.draw do
   get '/profile/orders', to: 'user/orders#index'
   get '/profile/orders/:id', to: 'user/orders#show'
   delete '/profile/orders/:id', to: 'user/orders#cancel'
+  patch '/profile/location/:id', to: 'users#set_locale', as: :set_locale
+  patch '/profile/orders/:id/location/:id', to: 'profile/locations#change', as: :change
+  namespace :profile do
+    resources :orders
+    resources :locales
+  end
 
   get '/login', to: 'sessions#new'
   post '/login', to: 'sessions#login'
@@ -47,4 +53,6 @@ Rails.application.routes.draw do
     resources :users, only: [:index, :show]
     patch '/orders/:id/ship', to: 'orders#ship'
   end
+
+  resources :locales
 end
