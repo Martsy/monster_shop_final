@@ -1,0 +1,46 @@
+<h1><%= @user.name %></h1>
+
+<section id='profile-info'>
+  <p>Email:
+    <%= @user.email %></p>
+  <div id='address-details'>
+    Address:
+    <p><%= @user.address %></p>
+    <p><%= @user.city %>,
+      <%= @user.state %>
+      <%= @user.zip %></p>
+  </div>
+  <p><%= link_to 'Edit', '/profile/edit' %></p>
+</section>
+
+<%= link_to 'Change Password', '/profile/edit_password' unless current_admin? %>
+
+<section id='locale-info'>
+  <h2>Shipping Locations</h2>
+  <% if @user.locales.any? %>
+    <% @user.locales.each do |locale| %>
+      <div id='locale-<%= locale.id %>'>
+        <h5><%= locale.nickname %></h5>
+        <p><%= locale.address %>,
+          <%= locale.city %>,<%= locale.state %><%= locale.zip %></p>
+        <p><%= link_to 'Delete', profile_locale_path(locale), method: :delete %>
+          <%= link_to 'Edit', edit_profile_locale_path(locale) %></p>
+        <p><%= link_to 'Select As Shipping Locale', set_locale_path(locale), method: :patch %></p>
+      </div>
+    <% end %>
+  <% else %>
+    You have not set your locale.
+  <% end %>
+  <p><%= link_to 'Add Locale', new_profile_locale_path %></p>
+</section>
+
+<section id='orders-data'>
+  <h2>Order Data</h2>
+  <p>
+    <% if @user.orders.any? %>
+      <%= link_to 'My Orders', profile_orders_path %>
+    <% else %>
+      You have no orders.
+    <% end %>
+  </p>
+</section>
