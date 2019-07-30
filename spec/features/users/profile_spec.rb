@@ -19,6 +19,20 @@ RSpec.describe "User Profile Path" do
       expect(page).to have_link('Edit')
     end
 
+    it 'I see a link to add a shipping locale' do
+      allow_any_instance_of(ApplicationController).to receive(:current_user).and_return(@user)
+
+      visit profile_path
+
+      within '#locale-info' do
+        expect(page).to have_link('Add Locale')
+
+        click_link 'Add Locale'
+
+        expect(current_path).to eq(new_profile_locale_path)
+      end
+    end
+
     it "I can update my profile data" do
       visit login_path
 
