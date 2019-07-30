@@ -19,7 +19,7 @@ RSpec.describe 'User Show Page' do
       expect(page).to have_content(@d_user.name)
       expect(page).to have_content(@d_user.email)
       expect(page).to have_content(@d_user.address)
-      expect(page).to have_content("#{@d_user.city} #{@d_user.state} #{@d_user.zip}")
+      expect(page).to have_content("#{@d_user.city}, #{@d_user.state}, #{@d_user.zip}")
       expect(page).to_not have_content(@d_user.password)
       expect(page).to_not have_link('Edit')
       expect(page).to_not have_link('Change Password')
